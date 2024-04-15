@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IIIT DWD - Video Upload and Processing</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="logo">
+    <img src="iiit_dwd_logo.png" alt="IIIT DWD Logo">
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#" class="home-link">Home</a></li>
+      <li><a href="#" class="about-link">About</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="main-content">
+  <div class="container">
+    <h1>Upload CCTV Footage for Processing</h1>
+    <div class="upload-area">
+        <div id="drop-area" class="drop-area" ondrop="handleDrop(event)" ondragover="allowDrop(event)">
+            <p id="upload-text">
+              <span>Drag and drop files here or</span><br>
+              <span>Click to browse</span>
+            </p>
+            <input type="file" id="fileElem" multiple accept="video/*" onchange="handleFiles(this.files)">
+          </div>
+          
+      <div id="file-preview" style="display: none;">
+        <p id="file-selected"></p> 
+        <button id="remove-button" onclick="removeFile()">Remove</button> 
+      </div>
+      
+      <!-- Submit Button -->
+      <button id="submit-button" onclick="submitVideo()">Submit</button>
+    </div>
+  </div>
+  <div class="about-section" style="display: none;">
+    <div class="container">
+      <p>At our college, we embrace the forefront of technological innovation. Upload CCTV footage, and our advanced system will process the video, detecting individuals and providing you with the best screenshot views. Experience the future of security surveillance with us.</p>
+    </div>
+  </div>
+</div>
+<script>
+function handleFiles(files) {
+  const fileName = document.getElementById('file-selected');
+  const filePreview = document.getElementById('file-preview');
+  
+  if (files && files[0]) {
+    fileName.textContent = files[0].name;
+    filePreview.style.display = 'block';
+  }
+}
+
+function removeFile() {
+  const fileName = document.getElementById('file-selected');
+  const filePreview = document.getElementById('file-preview');
+  const fileInput = document.getElementById('fileElem');
+
+  fileName.textContent = '';
+  filePreview.style.display = 'none';
+  fileInput.value = ''; 
+}
+
+function allowDrop(event) {
+  event.preventDefault();
+}
+
+function handleDrop(event) {
+  event.preventDefault();
+  const files = event.dataTransfer.files;
+  handleFiles(files);
+}
+
+function submitVideo() {
+  // Add code here to handle the submission of the video
+  // For example, you can use AJAX to send the video data to the server
+  alert("Video submitted!"); // Placeholder alert, replace with actual submission code
+}
+</script>
+</body>
+</html>
